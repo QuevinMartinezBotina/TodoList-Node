@@ -1,2 +1,13 @@
-# TodoList-Node
-Este es un ejercicio de creación de un todolist por consola, este es desarrollado para practicar habilidades con Node y JS, tanto como conocer paquetes de npm y como nos pueden ayudar.
+# **Lista de tareas de Node.js**
+![](https://cdn.svgporn.com/logos/nodejs.svg)
+
+------------
+
+*Este es un repositorio con la finalidad de practicar habilidades con Node.js y JavaScript.*
+
+------------
+## **Instrucciones para intalació**
+
+1. ```javascript
+npm install
+```

@@ -1,0 +1,25 @@
+{
+  "name": "3.todolist-node",
+  "version": "1.0.0",
+  "description": "![](https://cdn.svgporn.com/logos/nodejs.svg)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/QuevinMartinezBotina/TodoList-Node.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/QuevinMartinezBotina/TodoList-Node/issues"
+  },
+  "homepage": "https://github.com/QuevinMartinezBotina/TodoList-Node#readme",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "inquirer": "^8.2.1",
+    "uuid": "^8.3.2"
+  }
+}
