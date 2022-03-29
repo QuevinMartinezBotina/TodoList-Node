@@ -68,8 +68,30 @@ const pausa = async () => {
   return option; //?Devolvemos el valor de la pausa
 };
 
+//*Muetra uan pregunat segun la opcion del menu y guarda el valor de respuesta
+const leerInput = async (message) => {
+  const question = [
+    {
+      type: "input",
+      name: "desc",
+      message, //?Es un mensaje que varia segun la opción
+      //?Validacion para que se ingrese algo y no quede vacio
+      validate(value) {
+        if (value.length === 0) {
+          return "Por favor ingrese un valor";
+        }
+        return true;
+      },
+    },
+  ];
+
+  const { desc } = await inquirer.prompt(question);
+  return desc;
+};
+
 //*Exportamos las funciones para ser usadas en otro lugar
 module.exports = {
   inquirerMenu,
   pausa,
+  leerInput,
 };

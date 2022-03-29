@@ -1,3 +1,5 @@
+const Tarea = require("./tarea");
+
 class Tareas {
   /*   explicación de como funicona nuestro listado de DB
         !Vamos a tener un objeto que es nuestro listado de tareas
@@ -12,10 +14,25 @@ class Tareas {
     */
   _listado = {};
 
+  get listadoEnArreglo() {
+    const listado = []; //?Nos devuelve este arreglo
+    //?Sacamos todos los id de nuestra lista objeto para meterla a una lista arreglo
+    Object.keys(this._listado).forEach((idTarea) => {
+      const tarea = this._listado[idTarea]; //?En el obejto este atributo trae toda una tarea completa
+      listado.push(tarea); //?Guardamos esa tarea en nuestro lista arreglo
+    });
 
-  //*Eso es lo que se ejeucta cuando creamos una instancia
-  constructor (){
-      this._listado = {};
+    return listado;
+  }
+
+  //*Eso es lo que se ejecuta cuando creamos una instancia
+  constructor() {
+    this._listado = {};
+  }
+
+  crearTarea(desc = "") {
+    const tarea = new Tarea(desc); //?Llamamos una intancia y le pasamso la desc
+    this._listado[tarea.id] = tarea; //?Creamos un propieda = al id y ahi guardamos nuestar tarea
   }
 }
 
