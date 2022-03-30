@@ -1,5 +1,6 @@
 require("colors");
 
+const { guardarDB } = require("./helpers/conexion");
 const { inquirerMenu, pausa, leerInput } = require("./helpers/inquirer");
 const Tarea = require("./models/tarea");
 const Tareas = require("./models/Tareas");
@@ -25,6 +26,8 @@ const main = async () => {
       default:
         break;
     }
+
+    //guardarDB(tareas.listadoEnArreglo);//?Guardamos nuestras listas en una db
 
     await pausa();
   } while (opt !== "0");
