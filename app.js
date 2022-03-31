@@ -1,6 +1,6 @@
 require("colors");
 
-const { guardarDB } = require("./helpers/conexion");
+const { guardarDB, leerDB } = require("./helpers/conexion");
 const { inquirerMenu, pausa, leerInput } = require("./helpers/inquirer");
 const Tarea = require("./models/tarea");
 const Tareas = require("./models/Tareas");
@@ -8,6 +8,15 @@ const Tareas = require("./models/Tareas");
 const main = async () => {
   opt = "";
   const tareas = new Tareas(); //*Intanciamos clase para usar sus funciones y atributos
+
+  const tareasDB = leerDB(); //?usamos nuestra función para leer nuestra DB que esta en el JSON
+
+  if (tareasDB) {
+    //?Si existe vamos a  establecer las tareas
+    cargarTareaFromArray();
+  }
+
+  await pausa();
 
   do {
     opt = await inquirerMenu(); //*Mostramos menú y esperamos respuesta

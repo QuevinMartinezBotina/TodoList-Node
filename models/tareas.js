@@ -30,6 +30,10 @@ class Tareas {
     this._listado = {};
   }
 
+  cargarTareaFromArray (tareas = []){
+    this._listado[tarea.id] = tareas;
+  }
+
   crearTarea(desc = "") {
     const tarea = new Tarea(desc); //?Llamamos una intancia y le pasamso la desc
     this._listado[tarea.id] = tarea; //?Creamos un propieda = al id y ahi guardamos nuestar tarea
