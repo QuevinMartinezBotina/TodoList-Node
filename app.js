@@ -13,10 +13,8 @@ const main = async () => {
 
   if (tareasDB) {
     //?Si existe vamos a  establecer las tareas
-    cargarTareaFromArray();
+    tareas.cargarTareaFromArray(tareasDB);
   }
-
-  await pausa();
 
   do {
     opt = await inquirerMenu(); //*Mostramos menú y esperamos respuesta
@@ -29,14 +27,14 @@ const main = async () => {
         break;
       case "2":
         //Listar tareas
-        console.log(tareas.listadoEnArreglo);
+        console.log(tareas.listadoCompleto());
         break;
 
       default:
         break;
     }
 
-    //guardarDB(tareas.listadoEnArreglo);//?Guardamos nuestras listas en una db
+    guardarDB(tareas.listadoEnArreglo); //?Guardamos nuestras listas en una db
 
     await pausa();
   } while (opt !== "0");

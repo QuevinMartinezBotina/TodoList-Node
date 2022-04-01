@@ -13,10 +13,10 @@ const leerDB = () => {
   }
 
   //?recuperamos esos datos ahora que sabemso que existe el archivo
-  const infoDB = fs.readFileSync(archivo, { encoding: "utf-8" });//!Aquí solo es un string, neecitamos un objeto 
+  const infoDB = fs.readFileSync(archivo, { encoding: "utf-8" }); //!Aquí solo es un string, neecitamos un objeto
   const data = JSON.parse(infoDB);
 
-  console.log(data);
+  //console.log(data);
   return data;
 };
 

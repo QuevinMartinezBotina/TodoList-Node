@@ -1,4 +1,5 @@
 const Tarea = require("./tarea");
+const color = require("colors");
 
 class Tareas {
   /*   explicación de como funicona nuestro listado de DB
@@ -30,8 +31,27 @@ class Tareas {
     this._listado = {};
   }
 
-  cargarTareaFromArray (tareas = []){
-    this._listado[tarea.id] = tareas;
+  //*Esto es proque necesitamso convertir nuestor objeto en un arreglo, pro ello se hace este proceso
+  cargarTareaFromArray(tareas = []) {
+    tareas.forEach((tarea) => {
+      this._listado[tarea.id] = tarea;
+    });
+  }
+
+  //*Esto es para listar de uan forma bonita y sin datos inncesarios, modelar la data
+  listadoCompleto() {
+    let i = 0;
+
+    this.listadoEnArreglo.forEach((tarea) => {
+      i++;
+      if (tarea.completadoEn == null) {
+        console.log(`${color.green(i)}. ${tarea.desc} :: ${"pendiente".red}`);
+      } else {
+        console.log(
+          `${color.green(i)}. ${tarea.desc} :: ${"completado".green}`
+        );
+      }
+    });
   }
 
   crearTarea(desc = "") {
