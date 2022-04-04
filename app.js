@@ -1,7 +1,14 @@
 require("colors");
 
 const { guardarDB, leerDB } = require("./helpers/conexion");
-const { inquirerMenu, pausa, leerInput } = require("./helpers/inquirer");
+const {
+  inquirerMenu,
+  pausa,
+  leerInput,
+  listarTareasBorrar,
+  confirmar,
+  mostrarListadoCheckList,
+} = require("./helpers/inquirer");
 const Tarea = require("./models/tarea");
 const Tareas = require("./models/Tareas");
 
@@ -28,6 +35,35 @@ const main = async () => {
       case "2":
         //Listar tareas
         console.log(tareas.listadoCompleto());
+        break;
+
+      case "3":
+        //listar tareas completadas
+        tareas.listarPendientesCompletadas(true);
+        break;
+
+      case "4":
+        //listar tareas pendientes
+        tareas.listarPendientesCompletadas(false);
+        break;
+      case "5":
+        //Completar tareas
+        const ids = await mostrarListadoCheckList(tareas.listadoEnArreglo);
+        tareas.toggleCompletadas(ids);
+        break;
+      case "6":
+        //listar tareas por borrar
+        const id = await listarTareasBorrar(tareas.listadoEnArreglo); //?Desplegamso una list con las tareas paar seleccionar una a eliminar
+        if (id !== "0") {
+          //todo: Preguntamos si esta seguro de eliminar
+          const confirm = await confirmar("¿Esta seguro?");
+          if (confirm) {
+            tareas.borrarTarea(id);
+            console.log(" Realizado con exito!".rainbow);
+          } else {
+            console.log(" Cancelado con exito!".rainbow);
+          }
+        }
         break;
 
       default:

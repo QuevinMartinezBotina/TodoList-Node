@@ -89,9 +89,86 @@ const leerInput = async (message) => {
   return desc;
 };
 
+//*Listamso todas nuestras tareas y seleccionamso 1 que queremos borrar omando su id
+const listarTareasBorrar = async (tareas = []) => {
+  //?Tomamos el array y lo volvemos uno nuevo para trabajr con el y su datos
+  const choices = tareas.map((tarea, i) => {
+    const idx = `${++i}`.red;
+    return {
+      value: tarea.id,
+      name: `${idx} ${tarea.desc}`,
+    };
+  });
+
+  choices.unshift({
+    value: "0",
+    name: "0.".red + "Cancelar",
+  });
+
+  //?Este es el listado que vamos a desplegar. paar que seleccionen que eliminar
+  const cuestions = [
+    {
+      type: "list",
+      name: "id",
+      message: "borrar",
+      choices,
+    },
+  ];
+
+  //?Retornamos ese id de la tarea para saber que tarea eliminar
+  const { id } = await inquirer.prompt(cuestions);
+  return id;
+};
+
+//*Lo usamos para confirmar la eliminación de una tarea
+const confirmar = async (message) => {
+  //?El mensaje que vamso amostrar y el cual devuelve un booleano
+  const cuestions = [
+    {
+      type: "confirm",
+      name: "ok",
+      message,
+    },
+  ];
+
+  //?Aqui imprimimos y capturamos esa respuesta de true or false
+  const { ok } = await inquirer.prompt(cuestions);
+  return ok;
+};
+
+//*El encargado de monstrar un check de seleccion para completar tareas
+const mostrarListadoCheckList = async (tareas = []) => {
+  //?Tomamos el array y lo volvemos uno nuevo para trabajr con el y su datos
+  const choices = tareas.map((tarea, i) => {
+    const idx = `${++i}`.red;
+    return {
+      value: tarea.id,
+      name: `${idx} ${tarea.desc}`,
+      checked: tarea.completadoEn ? true : false, //?Dependiendo si esta completado o no se marca, ay que tiene un valor de tru o false
+    };
+  });
+
+  //?Este es el listado que vamos a desplega seleccionar una tarea y completarla
+  const cuestion = [
+    {
+      type: "checkbox",
+      name: "ids",
+      message: "Selecciones",
+      choices,
+    },
+  ];
+
+  //?Retornamos esos id de tareas para saber que tareas marcar como completada
+  const { ids } = await inquirer.prompt(cuestion);
+  return ids;
+};
+
 //*Exportamos las funciones para ser usadas en otro lugar
 module.exports = {
   inquirerMenu,
   pausa,
   leerInput,
+  listarTareasBorrar,
+  confirmar,
+  mostrarListadoCheckList,
 };
